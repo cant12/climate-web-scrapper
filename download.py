@@ -4,6 +4,10 @@ from tqdm import tqdm
 import pandas as pd
 from custom_driver import download_pdf
 
+'''
+use as python download.py ./data/agu -1 > download_agu.log & 
+'''
+
 root_dir = sys.argv[1]
 df = pd.read_csv(root_dir.split('/')[-1] + '.csv')
 checkpoint = -1
@@ -25,7 +29,7 @@ for i in range(len(df)):
     arg_list.append((df['PDF Link'][i], dir))
 
 count = 0
-for url, dir in tqdm(arg_list[:10], file=sys.stdout):
+for url, dir in tqdm(arg_list, file=sys.stdout):
     if count > checkpoint:
         download_pdf(url, dir)
     count += 1
