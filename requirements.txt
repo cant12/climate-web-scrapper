@@ -1,4 +1,5 @@
 tqdm==4.66.1
 pandas==2.2.1
 selenium==4.18.1
+webdriver-manager==4.0.1
 bs4==0.0.2
