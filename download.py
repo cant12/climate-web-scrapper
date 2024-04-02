@@ -2,7 +2,7 @@ import os
 import sys
 from tqdm import tqdm
 import pandas as pd
-from custom_driver import bulk_download_pdfs_1, download_pdf
+from custom_driver import download_pdf
 
 root_dir = sys.argv[1]
 df = pd.read_csv(root_dir.split('/')[-1] + '.csv')
