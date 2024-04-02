@@ -1,9 +1,7 @@
 import os
 import time
 import shutil
-import threading
-from tqdm import tqdm
-from concurrent.futures import ThreadPoolExecutor
+import multiprocessing
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
@@ -35,7 +33,7 @@ def get_page_content(url):
 
 def download_pdf(url, download_dir):
     try:
-        temp_dir = './.Driver/cache/download_' + str(threading.get_ident())
+        temp_dir = './.Driver/cache/download_' + str(multiprocessing.current_process().pid)
         if os.path.exists(temp_dir):
             shutil.rmtree(temp_dir)
         os.makedirs(temp_dir)
@@ -64,14 +62,3 @@ def download_pdf(url, download_dir):
     except Exception as e:
         print('Got exception ' + str(e) + ' while downloading from ' + url)
         return False
-
-def bulk_download_pdfs(arg_list):
-    url_list = []
-    download_dir_list = []
-    for url, download_dir in arg_list:
-        url_list.append(url)
-        download_dir_list.append(download_dir)
-    
-    with ThreadPoolExecutor() as executor:
-        results = list(tqdm(executor.map(download_pdf, url_list, download_dir_list), total=len(arg_list)))
-    
