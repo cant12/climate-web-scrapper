@@ -4,6 +4,10 @@ import pdftotext
 import pandas as pd
 from tqdm import tqdm
 
+'''
+use as python extract_text.py ./data/agu ./agu_raw_text.csv > extract_text_agu.log & 
+'''
+
 pdf_data_dir = sys.argv[1]
 output_csv = sys.argv[2]
 bad_pdfs_count = 0
